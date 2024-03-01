@@ -182,10 +182,80 @@ console.log(area)*/
                   nome: 'joao',
                   idade:28,
                  } */
-              
+              /* 
                  const listadenomes = ["mica" , "paula" , "vitor"]
                  const copialistadenomes = [ ...listadenomes]
 
-                 console.log(copialistadenomes) // ["mica" , "paula" , "vitor"]
+                 console.log(copialistadenomes) // ["mica" , "paula" , "vitor"] */
 
-                 
+                 /*let condicao1=falce
+                 let condicao2=falce
+
+                 if(condicao1){
+                  console.log('entrei no if 1!')
+
+                 } elce if (condicao2){
+                   console.log('entrei no if 2!')
+                 }else{
+                  
+                  //como tanto o valor da condicao
+                 console.log()*/
+
+                 /*let paisdeorigem
+                 if ( paisdeorigem === 'brasil'){
+                      console.log('brasileiro')
+                 }else if(paisdeorigem ==='EUA'){
+                       console.log( 'norte americano')
+                 }else if(paisdeorigem ==='inglatera'){
+                       console.log('ingles')
+                 }else if  ( paisdeorigem === 'franca'){
+                        console.log('frances')
+                  }else if(paisdeorigem === 'italia'){
+                        console.log(italiano)
+                  }else if ('paisdeorigem === 'canada'){
+                        console.log('canadense')
+                 }else{
+                  console.log('nacionalidade nao encontrada')
+                  }*/
+                  
+                  /*let paisdeorigem
+                  switch (paisdeorigem){
+                  case 'brasil':
+                    console.log('brasileiro')
+                      break
+                    case 'EUA':
+                  console.log('norteamericano')
+                      break
+                      case 'inglatera':
+                  console.log('ingles')
+                        break
+                        default:
+                  console.log('nacionalidade nao encontrada')
+                      break
+                  }*/
+
+                  /*var pokemon = prompt ('escolherpokemon'){
+                  switch (pokemon)
+                  case 'bulbusauro':
+                      console.log('planeta veneno')
+                      break
+                  case 'charmander':
+                    console.log('fogo')
+                      break
+                  case 'squirtle':
+                      console.log('agua')  
+                      break
+                      default:
+                      console.log('')
+                  }*/
+                    let condicao1 = true
+                    let condicao2 = falce 
+
+                    if ( condicao1 && condicao2){
+                      // entra aqui se ambas forem true
+
+                    }
+                    if (!condicao1){
+                      // entra aqui se condicao1 for false
+                    }
+
