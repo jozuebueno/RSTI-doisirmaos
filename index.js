@@ -248,14 +248,36 @@ console.log(area)*/
                       default:
                       console.log('')
                   }*/
-                    let condicao1 = true
-                    let condicao2 = falce 
+                     /*let condicao1 = true
+                    let condicao2 = falce*/ 
 
-                    if ( condicao1 && condicao2){
+                    /*if ( condicao1 && condicao2){
                       // entra aqui se ambas forem true
 
                     }
                     if (!condicao1){
                       // entra aqui se condicao1 for false
-                    }
+                    }*/
 
+                       /* function podeentrarnafaculdade(ensinomedio, idade,faculdade){
+                        if(ensinomedio === "sim" || ensinomedio === "sim")
+                        {ensinomedio = true ;} else { ensinomedio  =false;}
+                        
+                        if(faculdade === "sim" || faculdade === "sim")
+                        {faculdade === true} else {faculdade = false;}
+
+                        if (idade >=18 && ensinomedio && faculdade){
+                          return "vove pode entrar na faculdade";
+                        }
+                          else{return"vove noa pode etrar na faculdade";}
+                      }
+
+                      console.log
+                      podeentrarnafaculdade(
+                      prompt("voce concluiu o ensino medio?"),
+                      number(prompet("qual sua idade?")),
+                      prompt("voce ja estuda em uma faculdade?")
+                      ) */
+                    /*function calculaarea(base ,altura) {
+                      
+                    }*/
