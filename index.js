@@ -281,3 +281,64 @@ console.log(area)*/
                     /*function calculaarea(base ,altura) {
                       
                     }*/
+                    
+                    //fazer um cafe 
+                    //pegar uma chaleira ,levar ate a torneira , abrir a torneira,
+                    //encrer de agua,fechar a torneira,levar achaleira  ate o fogao,colocar em cima do fogao
+                    //,pegar um esqueiro,
+                    //ligar o botao, acender , ferver a agua, pegar um bule,pegar um feltro,
+                    // pegar o recipiente com o cafe, colocar o po de cafe no feltro,despejar a agua,esperar filtrar,
+                    // degustar;
+
+                    // o usuario e solicitado a digitar tres numeros separadamente
+                    //os numeros sao lidos e armazenados em variaveis(numero1 , numero2,numero3)
+
+
+                    /*let i = 0
+                    while ( i < 10){
+                      console.log(i)
+                      i++
+                    }*/
+
+                    /*let estomogo = 0;
+                    while(estomogo < 100 ) {
+                      console.log("quero comer mais coxinhas");
+                      estomogo = estomogo + 10;
+                    }*/
+
+               /*function somarnumeros(){
+                let soma =0;
+                let numero=1;
+                while(numero !== 0 ){
+                numero= number(prompt("digite um numero(ou 0 para sair): "));
+                 soma += numero;
+               }
+               console.log('a soma dos numeros digitados é: $ {soma}');
+              }
+              somarnumeros() */
+              
+              /*for(let i=0; i<10; i++){
+                console.log(i)
+              }*/
+
+              /*const numeros =[14,67,89,15,23]
+              for(let i=0; i<5; i++){
+                const elemento= numeros[i]
+                console.log(elemento)
+              }*/
+              
+
+
+   function somarNumeroscomarray(){
+    var numeros =[];
+    var numero = 1;
+    while( numero!==0){
+  numero=Number(prompt(" digite um numero (ou 0 para sair") );
+    numeros.push( numero)
+
+   }
+   var soma = numeros.reduce((acumulador,numero)=> acumulador+numeros,0);
+   return soma
+          
+}
+console.log(somarNumeroscomarray) 
