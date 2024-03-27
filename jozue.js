@@ -1,25 +1,26 @@
+// Função principal para iniciar o programa e apresentar o menu de opções ao usuário
 function iniciarPrograma() {
     while (true) {
-      const escolha = parseInt(prompt(`Escolha uma opção:\n1. Cadastrar Quarto\n2. Reservar Quarto\n3. Visualizar Reservas\n4. Buscar Reserva por ID\n5. Editar Reserva\n6. Cancelar Reserva\n7. Sair`));
+      const escolha = parseInt(prompt(`Escolha uma opção:\n1. Cadastrar Sala\n2. Agendar Reserva\n3. Visualizar Agendamentos\n4. Buscar Agendamento por ID\n5. Editar Agendamento\n6. Excluir Agendamento\n7. Sair`));
   
       switch (escolha) {
         case 1:
-          cadastrarQuarto();
+          cadastrarSala();
           break;
         case 2:
-          reservarQuarto();
+          agendarReserva();
           break;
         case 3:
-          visualizarReservas();
+          visualizarAgendamentos();
           break;
         case 4:
-          buscarReservaPorId();
+          buscarAgendamentoPorId();
           break;
         case 5:
-          editarReserva();
+          editarAgendamento();
           break;
         case 6:
-          cancelarReserva();
+          excluirAgendamento();
           break;
         case 7:
           return;
@@ -29,141 +30,117 @@ function iniciarPrograma() {
     }
   }
   
-  // Função para cadastrar um novo quarto
-  function cadastrarQuarto() {
-    const numeroQuarto = prompt('Digite o número do quarto:');
-    const tipo = prompt('Escolha o tipo do quarto:\n1. Simples\n2. Duplo\n3. Suíte');
+  // Função para cadastrar uma nova sala
+  function cadastrarSala() {
+    const numeroSala = prompt('Digite o número da sala:');
+    const descricao = prompt('Digite a descrição da sala:');
+    const novaSala = { numeroSala, descricao };
   
-    let descricaoTipo;
-    switch (tipo) {
-      case '1':
-        descricaoTipo = 'Simples';
-        break;
-      case '2':
-        descricaoTipo = 'Duplo';
-        break;
-      case '3':
-        descricaoTipo = 'Suíte';
-        break;
-      default:
-        alert('Opção inválida.');
-        return;
-    }
+    // Obter salas cadastradas da sessão do navegador
+    let salas = JSON.parse(sessionStorage.getItem('salas')) || [];
+    salas.push(novaSala);
   
-    const novoQuarto = { numeroQuarto, tipo: descricaoTipo, reservas: [] };
+    // Armazenar salas atualizadas na sessão do navegador
+    sessionStorage.setItem('salas', JSON.stringify(salas));
   
-    // Obter quartos cadastrados da sessão do navegador
-    let quartos = JSON.parse(sessionStorage.getItem('quartos')) || [];
-    quartos.push(novoQuarto);
-  
-    // Armazenar quartos atualizados na sessão do navegador
-    sessionStorage.setItem('quartos', JSON.stringify(quartos));
-  
-    alert('Quarto cadastrado com sucesso!');
+    alert('Sala cadastrada com sucesso!');
   }
   
-  // Função para reservar um quarto
-  function reservarQuarto() {
-    const numeroQuarto = prompt('Digite o número do quarto:');
+  // Função para agendar uma nova reserva
+  function agendarReserva() {
+    const numeroSala = prompt('Digite o número da sala:');
     const data = prompt('Digite a data da reserva (Formato: YYYY-MM-DD):');
     const horario = prompt('Digite o horário da reserva (Formato: HH:MM):');
   
-    const reserva = { data, horario };
+    const reserva = { numeroSala, data, horario };
   
-    // Obter quartos cadastrados da sessão do navegador
-    let quartos = JSON.parse(sessionStorage.getItem('quartos')) || [];
+    // Obter reservas agendadas da sessão do navegador
+    let reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
     
-    // Encontrar o quarto pelo número
-    const quarto = quartos.find(q => q.numeroQuarto === numeroQuarto);
-  
-    if (!quarto) {
-      alert('Quarto não encontrado.');
-      return;
-    }
-  
-    // Verificar disponibilidade do quarto
-    const disponivel = quarto.reservas.every(r => {
-      return !(r.data === reserva.data && r.horario === reserva.horario);
+    // Verificar disponibilidade da sala
+    const disponivel = reservas.every(r => {
+      return !(r.numeroSala === reserva.numeroSala && r.data === reserva.data && r.horario === reserva.horario);
     });
   
     if (!disponivel) {
-      alert('Quarto não disponível nesse horário.');
+      alert('Sala não disponível nesse horário.');
       return;
     }
   
-    quarto.reservas.push(reserva);
+    reservas.push(reserva);
   
-    // Armazenar quartos atualizados na sessão do navegador
-    sessionStorage.setItem('quartos', JSON.stringify(quartos));
+    // Armazenar reservas atualizadas na sessão do navegador
+    sessionStorage.setItem('reservas', JSON.stringify(reservas));
   
-    alert('Quarto reservado com sucesso!');
+    alert('Reserva agendada com sucesso!');
   }
   
-  // Função para listar todas as reservas
-  function visualizarReservas() {
-    const quartos = JSON.parse(sessionStorage.getItem('quartos')) || [];
+  // Função para listar todos os agendamentos
+  function visualizarAgendamentos() {
+    const reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
     
-    if (quartos.length === 0) {
-      alert('Nenhuma reserva encontrada.');
+    if (reservas.length === 0) {
+      alert('Nenhum agendamento encontrado.');
       return;
     }
   
-    let lista = 'Reservas:\n';
-    quartos.forEach(quarto => {
-      quarto.reservas.forEach((reserva, index) => {
-        lista += `Quarto ${quarto.numeroQuarto}, Tipo: ${quarto.tipo}, Data: ${reserva.data}, Horário: ${reserva.horario}\n`;
-      });
+    let lista = 'Agendamentos:\n';
+    reservas.forEach((reserva, index) => {
+      lista += `${index + 1}. Sala ${reserva.numeroSala}, Data: ${reserva.data}, Horário: ${reserva.horario}\n`;
     });
   
     alert(lista);
   }
   
-  // Função para buscar uma reserva específica pelo ID
-  function buscarReservaPorId() {
-    const id = parseInt(prompt('Digite o ID da reserva:'));
-    const quartos = JSON.parse(sessionStorage.getItem('quartos')) || [];
+  // Função para buscar um agendamento específico pelo ID
+  function buscarAgendamentoPorId() {
+    const id = parseInt(prompt('Digite o ID do agendamento:'));
+    const reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
   
-    if (id <= 0) {
+    if (id <= 0 || id > reservas.length) {
       alert('ID inválido.');
       return;
     }
   
-    let count = 0;
-    let encontrada = false;
-    quartos.forEach(quarto => {
-      quarto.reservas.forEach(reserva => {
-        count++;
-        if (count === id) {
-          encontrada = true;
-          alert(`Quarto ${quarto.numeroQuarto}, Tipo: ${quarto.tipo}, Data: ${reserva.data}, Horário: ${reserva.horario}`);
-        }
-      });
-    });
-  
-    if (!encontrada) {
-      alert('Reserva não encontrada.');
-    }
+    const reserva = reservas[id - 1];
+    alert(`Sala ${reserva.numeroSala}, Data: ${reserva.data}, Horário: ${reserva.horario}`);
   }
   
-  // Função para editar uma reserva
-  function editarReserva() {
-    const id = parseInt(prompt('Digite o ID da reserva que deseja editar:'));
-    const quartos = JSON.parse(sessionStorage.getItem('quartos')) || [];
+  // Função para editar um agendamento
+  function editarAgendamento() {
+    const id = parseInt(prompt('Digite o ID do agendamento que deseja editar:'));
+    const reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
   
-    if (id <= 0) {
+    if (id <= 0 || id > reservas.length) {
       alert('ID inválido.');
       return;
     }
   
-    let count = 0;
-    let encontrada = false;
-    quartos.forEach(quarto => {
-      quarto.reservas.forEach(reserva => {
-        count++;
-        if (count === id) {
-          encontrada = true;
-          const novaData = prompt('Digite a nova data da reserva (Formato: YYYY-MM-DD):');
-          const novoHorario = prompt('Digite o novo horário da reserva (Formato: HH:MM):');
-          
-          reserva.data = novaData;
-          reserva.horario = novoHor
+    const novaData = prompt('Digite a nova data da reserva (Formato: YYYY-MM-DD):');
+    const novoHorario = prompt('Digite o novo horário da reserva (Formato: HH:MM):');
+  
+    reservas[id - 1].data = novaData;
+    reservas[id - 1].horario = novoHorario;
+  
+    sessionStorage.setItem('reservas', JSON.stringify(reservas));
+    alert('Agendamento editado com sucesso!');
+  }
+  
+  // Função para excluir um agendamento
+  function excluirAgendamento() {
+    const id = parseInt(prompt('Digite o ID do agendamento que deseja excluir:'));
+    const reservas = JSON.parse(sessionStorage.getItem('reservas')) || [];
+  
+    if (id <= 0 || id > reservas.length) {
+      alert('ID inválido.');
+      return;
+    }
+  
+    reservas.splice(id - 1, 1);
+  
+    sessionStorage.setItem('reservas', JSON.stringify(reservas));
+    alert('Agendamento excluído com sucesso!');
+  }
+  
+  // Iniciar o programa
+  iniciarPrograma();
